@@ -16,20 +16,19 @@ browser.get('https://www.smitegame.com/gods/') #the site attempting to be access
 
 time.sleep(2)#required for the page to load in time and then continue to scrape from page
 print(browser.title) #grab the title of the page
-god_names = browser.find_elements_by_class_name('details__name') #find the god name
-god_titles = browser.find_elements_by_class_name('details__title') #find the god 'title'? Description?
+SmiteGodNames = browser.find_elements_by_class_name('details__name') #find the god name
+SmiteGodTitles = browser.find_elements_by_class_name('details__title') #find the god 'title'? Description?
 
-OG_god_names = []
-OG_god_titles = []
-god_info = ['God Name', 'God Title']
+GodNamesList = []
+GodTitlesList = []
 
-for god in god_names: #for god in god_names
-	OG_god_names.append((god.text).upper()) #god.text is the text from the site, not sure how to get around this
+for god in SmiteGodNames: #for god in SmiteGodNames
+	GodNamesList.append((god.text).upper()) #god.text is the text from the site, not sure how to get around this
 
-for title in god_titles: #for title in god_titles
-	OG_god_titles.append(title.text) #title.text is the text from the site, not sure how to get around this
+for title in SmiteGodTitles: #for title in SmiteGodTitles
+	GodTitlesList.append(title.text) #title.text is the text from the site, not sure how to get around this
 
-smite_gods_dictionary = dict(zip(OG_god_names, OG_god_titles))
+smite_gods_dictionary = dict(zip(GodNamesList, GodTitlesList))
 
 
 with open('smite-gods.csv', 'w', newline='') as gods_csv:
