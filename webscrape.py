@@ -16,8 +16,8 @@ browser.get('https://www.smitegame.com/gods/') #the site attempting to be access
 
 time.sleep(2)#required for the page to load in time and then continue to scrape from page
 print(browser.title) #grab the title of the page
-SmiteGodNames = browser.find_elements_by_class_name('details__name') #find the god name
-SmiteGodTitles = browser.find_elements_by_class_name('details__title') #find the god 'title'? Description?
+SmiteGodNames = browser.find_elements(By.CLASS_NAME, 'details__name') #find the god name
+SmiteGodTitles = browser.find_elements(By.CLASS_NAME, 'details__title') #find the god 'title'? Description?
 
 GodNamesList = []
 GodTitlesList = []

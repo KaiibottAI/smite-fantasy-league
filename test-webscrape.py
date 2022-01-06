@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-import requests
-import re
-import time
 import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -23,21 +20,22 @@ GodInfo = []
 SmiteGodInfo = browser.find_elements(By.CLASS_NAME, 'meta__single')
 SmiteGodName = browser.find_element(By.CSS_SELECTOR, 'h1').text
 SmiteGodTitle = browser.find_element(By.CSS_SELECTOR, 'h4').text
-# print(SmiteGodName.text)
-# print(SmiteGodTitle.text)
 
-# for item in SmiteGodInfo:
-# 	print(item.text)
 for info in SmiteGodInfo:
 	GodInfo.append(info.text)
 
-GodInfo.insert(0,(SmiteGodTitle).upper())
-GodInfo.insert(0,(SmiteGodName).upper())
-print(GodInfo)
 
-with open('all-smite-gods.csv', 'w', newline='') as gods_csv:
+#there is probably a better way to go about addeding two items to the front of a list, this is what I have for now.
+GodInfo.insert(0,(SmiteGodTitle).upper()) #Add title to 'front' of list
+GodInfo.insert(0,(SmiteGodName).upper()) #add name to 'front' of list
+
+
+with open('all-smite-gods.csv', 'w+', newline='') as gods_csv:
 	headers = ['GOD', 'TITLE', 'CLASS','PANTHEON','RANGE','TYPE']
-	writer = csv.DictWriter(gods_csv, fieldnames=headers)
+	writer = csv.writer(gods_csv)
+	writer.writerow(headers)
+	writer.writerow(GodInfo)
+
 
 
 
